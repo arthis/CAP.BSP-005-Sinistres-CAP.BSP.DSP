@@ -1,0 +1,24 @@
+# EventStoreDB Configuration for CAP.BSP.DSP
+# This configuration file sets up stream naming conventions and projections
+
+# Cluster configuration
+ClusterSize: 1
+RunProjections: All
+StartStandardProjections: true
+
+# HTTP configuration
+HttpPort: 2113
+Insecure: true
+EnableAtomPubOverHttp: true
+
+# Stream naming configuration
+# Format: declaration-{declarationId}
+# Example: declaration-01HQXYZ123ABC456DEF789GHI
+
+# Projection configuration
+# Enable by-category projection for $by_category
+ProjectionThreads: 3
+
+# Security (development only - insecure)
+# In production, configure proper certificates and authentication
+# Note: Using EVENTSTORE_INSECURE=true environment variable instead

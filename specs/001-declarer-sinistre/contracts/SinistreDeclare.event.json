@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://bcm.foodaroo.com/schemas/events/SinistreDeclare.v1.json",
+  "title": "SinistreDéclaré Event",
+  "description": "Event emitted when a claim has been successfully declared. Conforms to BCM event contract for BSP-005-Sinistres capability.",
+  "type": "object",
+  "required": [
+    "eventId",
+    "occurredAt",
+    "identifiantSinistre",
+    "identifiantContrat",
+    "typeSinistre",
+    "dateSurvenance",
+    "dateDeclaration",
+    "statut"
+  ],
+  "properties": {
+    "eventId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this event instance (for idempotency tracking by consumers)",
+      "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC timestamp when the event occurred (ISO 8601)",
+      "example": "2026-01-27T14:30:00.000Z"
+    },
+    "identifiantSinistre": {
+      "type": "string",
+      "pattern": "^SIN-\\d{4}-\\d{6}$",
+      "description": "Auto-generated unique claim identifier in format SIN-YYYY-NNNNNN",
+      "example": "SIN-2026-000001"
+    },
+    "identifiantContrat": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Reference to the insurance contract associated with this claim",
+      "example": "CONTRAT-2026-001"
+    },
+    "typeSinistre": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "description": "Type of claim (validated against reference database). Examples: ACCIDENT_CORPOREL, DEGATS_MATERIELS, RESPONSABILITE_CIVILE",
+      "example": "ACCIDENT_CORPOREL"
+    },
+    "dateSurvenance": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when the insured event occurred (ISO 8601 date only, must be <= today)",
+      "example": "2026-01-20"
+    },
+    "dateDeclaration": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC timestamp when the claim was declared (system-set, not user-provided)",
+      "example": "2026-01-27T14:30:00.000Z"
+    },
+    "statut": {
+      "type": "string",
+      "enum": ["DECLARE", "VALIDE", "ANNULE"],
+      "description": "Declaration lifecycle state. DECLARE = initial state after declaration.",
+      "example": "DECLARE"
+    },
+    "correlationId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Correlation identifier for tracing related events and commands across the system",
+      "example": "7c9e6679-7425-40de-944b-e07fc1f90ae7"
+    },
+    "causationId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Causation identifier - ID of the command/event that caused this event",
+      "example": "550e8400-e29b-41d4-a716-446655440000"
+    },
+    "userId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Identity of the user who declared the claim (for audit trail)",
+      "example": "user@foodaroo.com"
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "eventId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "occurredAt": "2026-01-27T14:30:00.000Z",
+      "identifiantSinistre": "SIN-2026-000001",
+      "identifiantContrat": "CONTRAT-2026-001",
+      "typeSinistre": "ACCIDENT_CORPOREL",
+      "dateSurvenance": "2026-01-20",
+      "dateDeclaration": "2026-01-27T14:30:00.000Z",
+      "statut": "DECLARE",
+      "correlationId": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+      "causationId": "550e8400-e29b-41d4-a716-446655440000",
+      "userId": "user@foodaroo.com"
+    }
+  ]
+}

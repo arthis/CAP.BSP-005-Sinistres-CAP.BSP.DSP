@@ -1,0 +1,37 @@
+{
+  "version": "2.0",
+  "logging": {
+    "applicationInsights": {
+      "samplingSettings": {
+        "isEnabled": true,
+        "maxTelemetryItemsPerSecond": 20
+      }
+    },
+    "logLevel": {
+      "default": "Information",
+      "Function": "Information",
+      "Host.Results": "Information",
+      "Microsoft": "Warning",
+      "System": "Warning"
+    }
+  },
+  "functionTimeout": "00:05:00",
+  "concurrency": {
+    "dynamicConcurrencyEnabled": true,
+    "maximumFunctionConcurrency": 100
+  },
+  "extensions": {
+    "http": {
+      "routePrefix": "api/v1",
+      "maxOutstandingRequests": 200,
+      "maxConcurrentRequests": 100,
+      "dynamicThrottlesEnabled": true
+    }
+  },
+  "retry": {
+    "strategy": "exponentialBackoff",
+    "maxRetryCount": 3,
+    "minimumInterval": "00:00:02",
+    "maximumInterval": "00:00:15"
+  }
+}

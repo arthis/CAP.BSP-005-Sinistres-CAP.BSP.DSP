@@ -1,0 +1,67 @@
+# .NET Build and Runtime
+bin/
+obj/
+out/
+*.user
+*.suo
+*.cache
+*.log
+*.tmp
+*.swp
+
+# NuGet Packages
+packages/
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Azure Functions
+local.settings.json
+__blobstorage__/
+__queuestorage__/
+__azurite_db*__.json
+.python_packages/
+
+# IDE / Editor
+.vs/
+.vscode/
+.idea/
+*.DotSettings.user
+*.sln.docstates
+
+# Operating System
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Test Results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# Rider
+.idea/
+*.sln.iml
+
+# Docker
+docker-compose.override.yml
+
+# Build Outputs
+publish/
+*.dll
+*.pdb
+*.exe
+
+# Sensitive Data
+*.pfx
+*.p12
+appsettings.Development.json
+secrets.json
